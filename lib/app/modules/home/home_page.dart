@@ -5,7 +5,7 @@ import 'package:movielist/app/modules/home/home_store.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
-  const HomePage({this.title = "Home"}) : super();
+  const HomePage({Key? key, this.title = "Home"}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -18,8 +18,10 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
       appBar: AppBar(
         title: Text('Counter'),
       ),
-      body: Observer(
-        builder: (context) => Text('${store.counter}'),
+      body: Center(
+        child: Observer(
+          builder: (context) => Text('${store.counter}'),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
