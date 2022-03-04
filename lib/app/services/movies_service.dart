@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:movielist/app/models/movie_model.dart';
 import 'package:movielist/app/utils/config.dart';
 
 class MoviesService extends Disposable {
@@ -8,7 +9,7 @@ class MoviesService extends Disposable {
   Future getData(String url) async {
     final response = await _dio.get(url);
     if (response.statusCode == 200) {
-      return response.data;
+      return response.data.map((movie) => MovieModel.fromJson(movie)).toList();
     } else {
       print("Error in URL");
     }

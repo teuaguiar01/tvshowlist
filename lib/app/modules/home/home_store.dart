@@ -16,5 +16,6 @@ abstract class HomeStoreBase with Store {
   Future<void> increment() async {
     counter = counter + 1;
     final data = await moviesService.getData("/shows?page=0");
+    print(data);
   }
 }
