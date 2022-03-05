@@ -16,6 +16,16 @@ class TvShowsService extends Disposable {
     }
   }
 
+  Future getSearch(String url) async {
+    final response = await _dio.get(url);
+    if (response.statusCode == 200) {
+      return response.data.map((element) => TvShow.fromJson(element['show'])).toList();
+    } else {
+      print("Error in URL");
+      return [];
+    }
+  }
+
   Future getEpisodes(String url) async {
     final response = await _dio.get(url);
     if (response.statusCode == 200) {

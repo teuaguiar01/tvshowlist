@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tvShowlist/app/models/tv_show_model.dart';
+import 'package:tvShowlist/app/modules/home/components/search_widget.dart';
 import 'package:tvShowlist/app/modules/home/components/tv_show_tile.dart';
 import 'package:tvShowlist/app/modules/home/home_store.dart';
 
@@ -25,7 +26,28 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueGrey.shade900,
-        title: Text('TvShows'),
+        title: Observer(
+          builder: (context) => store.searchOn
+              ? SearchWidget(searchController: store.searchController)
+              : Text('TvShows'),
+        ),
+        leading: Observer(
+            builder: (context) => store.searchOn
+                ? IconButton(
+                    onPressed: () {
+                      store.setSearch(false);
+                      store.searchController.clear();
+                      store.getPage();
+                    },
+                    icon: Icon(Icons.close),
+                  )
+                : Container()),
+        actions: [
+          IconButton(
+            onPressed: () => store.search(),
+            icon: Icon(Icons.search),
+          ),
+        ],
       ),
       body: Center(
         child: Observer(
@@ -81,4 +103,3 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
     );
   }
 }
-

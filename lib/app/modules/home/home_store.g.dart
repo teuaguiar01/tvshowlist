@@ -9,6 +9,21 @@ part of 'home_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HomeStore on HomeStoreBase, Store {
+  final _$searchOnAtom = Atom(name: 'HomeStoreBase.searchOn');
+
+  @override
+  bool get searchOn {
+    _$searchOnAtom.reportRead();
+    return super.searchOn;
+  }
+
+  @override
+  set searchOn(bool value) {
+    _$searchOnAtom.reportWrite(value, super.searchOn, () {
+      super.searchOn = value;
+    });
+  }
+
   final _$tvShowsAtom = Atom(name: 'HomeStoreBase.tvShows');
 
   @override
@@ -54,6 +69,13 @@ mixin _$HomeStore on HomeStoreBase, Store {
     });
   }
 
+  final _$searchAsyncAction = AsyncAction('HomeStoreBase.search');
+
+  @override
+  Future search() {
+    return _$searchAsyncAction.run(() => super.search());
+  }
+
   final _$getPageAsyncAction = AsyncAction('HomeStoreBase.getPage');
 
   @override
@@ -87,8 +109,20 @@ mixin _$HomeStore on HomeStoreBase, Store {
   }
 
   @override
+  dynamic setSearch(bool b) {
+    final _$actionInfo = _$HomeStoreBaseActionController.startAction(
+        name: 'HomeStoreBase.setSearch');
+    try {
+      return super.setSearch(b);
+    } finally {
+      _$HomeStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
+searchOn: ${searchOn},
 tvShows: ${tvShows},
 pageCounter: ${pageCounter},
 isLoading: ${isLoading}
