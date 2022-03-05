@@ -22,6 +22,7 @@ class _TvShowPageState extends ModularState<TvShowPage, TvShowStore> {
     super.initState();
     store.setTvShow(widget.tvShow);
     store.getPage();
+    store.episodeCounter = 0;
   }
 
   @override
@@ -100,6 +101,13 @@ class _TvShowPageState extends ModularState<TvShowPage, TvShowStore> {
                   ),
                 ),
                 Html(data: widget.tvShow.summary),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
+                  child: Text(
+                    "Episodes",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
                 store.isLoading
                     ? Center(
                         child: Padding(
@@ -135,10 +143,12 @@ class _TvShowPageState extends ModularState<TvShowPage, TvShowStore> {
                                         .length ??
                                     0,
                                 itemBuilder: (context, index) {
-                                  final episode = store.episodeList[store.episodeCounter];
+                                  final episode =
+                                      store.episodeList[store.episodeCounter];
                                   store.episodeCounter++;
                                   return ListTile(
-                                    title: Container(
+                                    title: GestureDetector(
+                                      onTap: () => _showMyDialog(episode),
                                       child: Text(episode!.name ?? 'Undefined'),
                                     ),
                                   );
@@ -152,6 +162,53 @@ class _TvShowPageState extends ModularState<TvShowPage, TvShowStore> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> _showMyDialog(Episode episode) async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('${episode.name}'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                if (episode.image != null && episode.image!.medium != null)
+                  CachedNetworkImage(
+                    height: 60,
+                    width: 40,
+                    imageUrl: episode.image!.medium!,
+                    placeholder: (_, __) => Center(
+                      heightFactor: 1,
+                      widthFactor: 1,
+                      child: SizedBox(
+                        height: 25,
+                        width: 25,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: Colors.blueGrey.shade900,
+                        ),
+                      ),
+                    ),
+                  ),
+                Text('Number: ${episode.number}'),
+                Text('Season: ${episode.season}'),
+                Html(data: episode.summary),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(primary: Colors.blueGrey.shade900),
+              child: Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
