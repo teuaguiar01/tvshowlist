@@ -9,18 +9,18 @@ part of 'home_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HomeStore on HomeStoreBase, Store {
-  final _$moviesAtom = Atom(name: 'HomeStoreBase.movies');
+  final _$tvShowsAtom = Atom(name: 'HomeStoreBase.tvShows');
 
   @override
-  dynamic get movies {
-    _$moviesAtom.reportRead();
-    return super.movies;
+  dynamic get tvShows {
+    _$tvShowsAtom.reportRead();
+    return super.tvShows;
   }
 
   @override
-  set movies(dynamic value) {
-    _$moviesAtom.reportWrite(value, super.movies, () {
-      super.movies = value;
+  set tvShows(dynamic value) {
+    _$tvShowsAtom.reportWrite(value, super.tvShows, () {
+      super.tvShows = value;
     });
   }
 
@@ -89,7 +89,7 @@ mixin _$HomeStore on HomeStoreBase, Store {
   @override
   String toString() {
     return '''
-movies: ${movies},
+tvShows: ${tvShows},
 pageCounter: ${pageCounter},
 isLoading: ${isLoading}
     ''';

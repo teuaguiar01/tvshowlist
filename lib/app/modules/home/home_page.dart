@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:movielist/app/models/movie_model.dart';
-import 'package:movielist/app/modules/home/components/movie_tile.dart';
-import 'package:movielist/app/modules/home/home_store.dart';
+import 'package:tvShowlist/app/models/tv_show_model.dart';
+import 'package:tvShowlist/app/modules/home/components/tv_show_tile.dart';
+import 'package:tvShowlist/app/modules/home/home_store.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
@@ -25,7 +25,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueGrey.shade900,
-        title: Text('Movies'),
+        title: Text('TvShows'),
       ),
       body: Center(
         child: Observer(
@@ -33,12 +33,12 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
               ? CircularProgressIndicator(color: Colors.blueGrey.shade900)
               : ListView.builder(
                   padding: EdgeInsets.only(top: 5, bottom: 50),
-                  itemCount: store.movies?.length ?? 0,
+                  itemCount: store.tvShows?.length ?? 0,
                   itemBuilder: (BuildContext context, int index) {
-                    Movie movie = store.movies[index];
+                    TvShow tvShow = store.tvShows[index];
                     return Column(
                       children: [
-                        MovieTile(movie: movie),
+                        TvShowTile(tvShow: tvShow),
                         Divider(),
                       ],
                     );

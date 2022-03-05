@@ -1,4 +1,4 @@
-package com.example.movielist
+package com.example.tvShowlist
 
 import io.flutter.embedding.android.FlutterActivity
 

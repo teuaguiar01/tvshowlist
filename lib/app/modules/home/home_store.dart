@@ -1,15 +1,15 @@
 import 'package:mobx/mobx.dart';
-import 'package:movielist/app/services/movies_service.dart';
+import 'package:tvShowlist/app/services/tv_shows_service.dart';
 
 part 'home_store.g.dart';
 
 class HomeStore = HomeStoreBase with _$HomeStore;
 
 abstract class HomeStoreBase with Store {
-  final MoviesService moviesService;
+  final TvShowsService tvShowsService;
 
   @observable
-  var movies;
+  var tvShows;
 
   @observable
   int pageCounter = 0;
@@ -19,13 +19,13 @@ abstract class HomeStoreBase with Store {
   @observable
   bool isLoading = false;
 
-  HomeStoreBase(this.moviesService);
+  HomeStoreBase(this.tvShowsService);
 
   @action
   Future<void> getPage() async {
     setLoading(true);
     try {
-      movies = (await moviesService.getData("/shows?page=$pageCounter"));
+      tvShows = (await tvShowsService.getData("/shows?page=$pageCounter"));
     } catch (e) {
       print(e);
     }

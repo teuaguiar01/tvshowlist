@@ -1,27 +1,27 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:movielist/app/models/movie_model.dart';
-import 'package:movielist/app/utils/config.dart';
+import 'package:tvShowlist/app/models/tv_show_model.dart';
+import 'package:tvShowlist/app/utils/config.dart';
 
-class MovieTile extends StatelessWidget {
-  const MovieTile({
+class TvShowTile extends StatelessWidget {
+  const TvShowTile({
     Key? key,
-    required this.movie,
+    required this.tvShow,
   }) : super(key: key);
 
-  final Movie movie;
+  final TvShow tvShow;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Modular.to.pushNamed('/movie', arguments: movie),
+      onTap: () => Modular.to.pushNamed('/tvShow', arguments: tvShow),
       child: ListTile(
         leading: Container(
           height: 60,
           width: 40,
           child: CachedNetworkImage(
-            imageUrl: movie.image?.original ?? AppConfig.noImageAvaiable,
+            imageUrl: tvShow.image?.original ?? AppConfig.noImageAvaiable,
             errorWidget: (context, url, error) => Icon(Icons.error),
             placeholder: (c, u) => Padding(
               padding: EdgeInsets.symmetric(
@@ -39,7 +39,7 @@ class MovieTile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(movie.title),
+            Text(tvShow.title),
           ],
         ),
       ),
