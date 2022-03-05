@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:movielist/app/components/movie_tile.dart';
 import 'package:movielist/app/models/movie_model.dart';
+import 'package:movielist/app/modules/home/components/movie_tile.dart';
 import 'package:movielist/app/modules/home/home_store.dart';
 
 class HomePage extends StatefulWidget {

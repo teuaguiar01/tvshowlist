@@ -55,6 +55,8 @@ class Movie {
   int? updated;
   Links? links;
 
+  String get title => name ?? 'undefined';
+
   Movie copyWith({
     int? id,
     String? url,

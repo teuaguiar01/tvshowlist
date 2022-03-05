@@ -1,5 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:movielist/app/modules/home/home_store.dart';
+import 'package:movielist/app/modules/home/pages/movie_page.dart';
 import 'package:movielist/app/services/movies_service.dart';
 
 import 'home_page.dart';
@@ -14,5 +15,6 @@ class HomeModule extends Module {
   @override
   final List<ModularRoute> routes = [
     ChildRoute(Modular.initialRoute, child: (_, args) => HomePage()),
+    ChildRoute('/movie', child: (context, args) => MoviePage(args.data)),
   ];
 }
