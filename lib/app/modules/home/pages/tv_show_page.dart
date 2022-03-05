@@ -101,20 +101,52 @@ class _TvShowPageState extends ModularState<TvShowPage, TvShowStore> {
                 ),
                 Html(data: widget.tvShow.summary),
                 store.isLoading
-                    ? Center(child: CircularProgressIndicator(color: Colors.blueGrey.shade900))
+                    ? Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: CircularProgressIndicator(
+                            color: Colors.blueGrey.shade900,
+                          ),
+                        ),
+                      )
                     : ListView.builder(
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
-                        itemCount: store.episodeList?.length ?? 0,
-                        itemBuilder: (context, index) {
-                          final episode = store.episodeList[index];
-                          return ListTile(
-                            title: Container(
-                              child: Text(episode!.name ?? 'Undefined'),
-                            ),
+                        itemCount: store.seasonList?.length ?? 0,
+                        itemBuilder: (ctx, idx) {
+                          final season = store.seasonList[idx];
+                          return Column(
+                            children: [
+                              ListTile(
+                                title: Text(
+                                  'Season ${season['number']}',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                              ListView.builder(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: store.episodeList
+                                        ?.where((episode) =>
+                                            episode.season == season['number'])
+                                        .length ??
+                                    0,
+                                itemBuilder: (context, index) {
+                                  final episode = store.episodeList[store.episodeCounter];
+                                  store.episodeCounter++;
+                                  return ListTile(
+                                    title: Container(
+                                      child: Text(episode!.name ?? 'Undefined'),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ],
                           );
-                        },
-                      )
+                        })
               ],
             ),
           ),

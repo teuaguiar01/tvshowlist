@@ -21,6 +21,8 @@ abstract class TvShowStoreBase with Store {
   @observable
   bool isLoading = false;
 
+  int episodeCounter = 0;
+
   TvShowStoreBase(this.tvShowsService);
 
   @action
@@ -31,7 +33,7 @@ abstract class TvShowStoreBase with Store {
     setLoading(true);
     try {
       seasonList =
-          await tvShowsService.getEpisodes("/shows/${tvShow!.id}/seasons");
+          await tvShowsService.getSeasons("/shows/${tvShow!.id}/seasons");
       episodeList =
           await tvShowsService.getEpisodes("/shows/${tvShow!.id}/episodes");
     } catch (e) {
