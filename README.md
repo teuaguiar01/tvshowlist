@@ -1,4 +1,4 @@
-# TvShowlist
+# TvShowList
 
 Listing and searching for tv shows using https://www.tvmaze.com/api.
 
