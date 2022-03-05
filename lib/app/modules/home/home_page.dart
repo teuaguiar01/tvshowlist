@@ -32,16 +32,17 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
               : Text('TvShows'),
         ),
         leading: Observer(
-            builder: (context) => store.searchOn
-                ? IconButton(
-                    onPressed: () {
-                      store.setSearch(false);
-                      store.searchController.clear();
-                      store.getPage();
-                    },
-                    icon: Icon(Icons.close),
-                  )
-                : Container()),
+          builder: (context) => store.searchOn
+              ? IconButton(
+                  onPressed: () {
+                    store.setSearch(false);
+                    store.searchController.clear();
+                    store.getPage();
+                  },
+                  icon: Icon(Icons.close),
+                )
+              : Container(),
+        ),
         actions: [
           IconButton(
             onPressed: () => store.search(),
