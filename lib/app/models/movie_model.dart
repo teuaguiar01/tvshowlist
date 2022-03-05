@@ -1,15 +1,15 @@
 // To parse this JSON data, do
 //
-//     final movieModel = movieFromJson(jsonString);
+//     final Movie = movieFromJson(jsonString);
 
 import 'dart:convert';
 
-MovieModel movieFromJson(String str) => MovieModel.fromJson(json.decode(str));
+Movie movieFromJson(String str) => Movie.fromJson(json.decode(str));
 
-String movieToJson(MovieModel data) => json.encode(data.toJson());
+String movieToJson(Movie data) => json.encode(data.toJson());
 
-class MovieModel {
-  MovieModel({
+class Movie {
+  Movie({
     this.id,
     this.url,
     this.name,
@@ -55,7 +55,7 @@ class MovieModel {
   int? updated;
   Links? links;
 
-  MovieModel copyWith({
+  Movie copyWith({
     int? id,
     String? url,
     String? name,
@@ -78,7 +78,7 @@ class MovieModel {
     int? updated,
     Links? links,
   }) =>
-      MovieModel(
+      Movie(
         id: id ?? this.id,
         url: url ?? this.url,
         name: name ?? this.name,
@@ -102,7 +102,7 @@ class MovieModel {
         links: links ?? this.links,
       );
 
-  factory MovieModel.fromJson(Map<String, dynamic> json) => MovieModel(
+  factory Movie.fromJson(Map<String, dynamic> json) => Movie(
         id: json["id"] == null ? null : json["id"],
         url: json["url"] == null ? null : json["url"],
         name: json["name"] == null ? null : json["name"],

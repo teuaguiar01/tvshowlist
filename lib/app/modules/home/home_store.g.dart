@@ -1,4 +1,4 @@
-// GENERATED CODE DO NOT MODIFY BY HAND
+// GENERATED CODE - DO NOT MODIFY BY HAND
 
 part of 'home_store.dart';
 
@@ -9,23 +9,89 @@ part of 'home_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HomeStore on HomeStoreBase, Store {
-  final _$counterAtom = Atom(name: 'HomeStoreBase.counter');
+  final _$moviesAtom = Atom(name: 'HomeStoreBase.movies');
 
   @override
-  int get counter {
-    _$counterAtom.reportRead();
-    return super.counter;
+  dynamic get movies {
+    _$moviesAtom.reportRead();
+    return super.movies;
   }
 
   @override
-  set counter(int value) {
-    _$counterAtom.reportWrite(value, super.counter, () {
-      super.counter = value;
+  set movies(dynamic value) {
+    _$moviesAtom.reportWrite(value, super.movies, () {
+      super.movies = value;
     });
+  }
+
+  final _$pageCounterAtom = Atom(name: 'HomeStoreBase.pageCounter');
+
+  @override
+  int get pageCounter {
+    _$pageCounterAtom.reportRead();
+    return super.pageCounter;
+  }
+
+  @override
+  set pageCounter(int value) {
+    _$pageCounterAtom.reportWrite(value, super.pageCounter, () {
+      super.pageCounter = value;
+    });
+  }
+
+  final _$isLoadingAtom = Atom(name: 'HomeStoreBase.isLoading');
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
+  final _$getPageAsyncAction = AsyncAction('HomeStoreBase.getPage');
+
+  @override
+  Future<void> getPage() {
+    return _$getPageAsyncAction.run(() => super.getPage());
+  }
+
+  final _$HomeStoreBaseActionController =
+      ActionController(name: 'HomeStoreBase');
+
+  @override
+  dynamic movePage(bool up) {
+    final _$actionInfo = _$HomeStoreBaseActionController.startAction(
+        name: 'HomeStoreBase.movePage');
+    try {
+      return super.movePage(up);
+    } finally {
+      _$HomeStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setLoading(bool b) {
+    final _$actionInfo = _$HomeStoreBaseActionController.startAction(
+        name: 'HomeStoreBase.setLoading');
+    try {
+      return super.setLoading(b);
+    } finally {
+      _$HomeStoreBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
   String toString() {
-    return 'counter: ${counter}';
+    return '''
+movies: ${movies},
+pageCounter: ${pageCounter},
+isLoading: ${isLoading}
+    ''';
   }
 }

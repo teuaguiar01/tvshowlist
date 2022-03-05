@@ -9,13 +9,38 @@ abstract class HomeStoreBase with Store {
   final MoviesService moviesService;
 
   @observable
-  int counter = 0;
+  var movies;
+
+  @observable
+  int pageCounter = 0;
+
+  String get pageCounterView => (pageCounter + 1).toString();
+
+  @observable
+  bool isLoading = false;
 
   HomeStoreBase(this.moviesService);
 
-  Future<void> increment() async {
-    counter = counter + 1;
-    final data = await moviesService.getData("/shows?page=0");
-    print(data);
+  @action
+  Future<void> getPage() async {
+    setLoading(true);
+    try {
+      movies = (await moviesService.getData("/shows?page=$pageCounter"));
+    } catch (e) {
+      print(e);
+    }
+    setLoading(false);
   }
+
+  @action
+  movePage(bool up) {
+    if (up)
+      pageCounter++;
+    else
+      pageCounter--;
+    getPage();
+  }
+
+  @action
+  setLoading(bool b) => isLoading = b;
 }

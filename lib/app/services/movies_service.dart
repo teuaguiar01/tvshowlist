@@ -9,9 +9,10 @@ class MoviesService extends Disposable {
   Future getData(String url) async {
     final response = await _dio.get(url);
     if (response.statusCode == 200) {
-      return response.data.map((movie) => MovieModel.fromJson(movie)).toList();
+      return response.data.map((movie) => Movie.fromJson(movie)).toList();
     } else {
       print("Error in URL");
+      return [];
     }
   }
 
